@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div id="app">
+	<h1>ToDoリスト</h1>
+	
+	
+    <!-- 絞り込みラジオボタン step11
+	<label v-for="label in options">
+	  <input type="radio"
+	      v-model="current"
+	      v-bind:value="label.value">{{ label.label }}
+	    
+	</label>
+	-->
+	
+	<!-- 絞り込みラジオボタン step11-->
+	<select
+	v-model="current">
+	
+	<option 
+	v-for="(option, index) in options"
+	v-bind:value="option.value"
+	>
+	{{ option.label }}
+	</option>
+	
+	</select>
+	
+	<!-- step12 -->
+	（{{ computedTodos.length }} 件を表示）
+	
+    <!-- テーブル -->
+	<table>
+		<thead>
+			<tr>
+				<th class="id">ID</th>
+				<th class="comment">作業</th>
+				<th class="comment">コメント</th>
+				<th class="state">状態</th>
+				<th class="button">処理</th>
+			</tr>
+		</thead>
+		<!--step5-->
+		<tbody>
+			<tr v-for="item in computedTodos" v-bind:key="item.id">
+			    <th>{{ item.id }}</th>
+			    <td>{{ item.comment }}</td>
+				<td class="add-form">
+					
+					<textarea placeholder="ここに入力してください"></textarea>
+				</td>
+			    <td class="state">
+			      <!-- 状態変更ボタンのモック  step10-->
+			      <button v-on:click="doChangeState(item)">
+				  {{ labels[item.state] }}
+				  </button>
+			    </td>
+			    <td class="button">
+			      <!-- 削除ボタンのモック  step10-->
+			      <button v-on:click.ctrl="doRemove(item)">
+					  削除
+				  </button>
+			    </td>
+			  </tr>
+		</tbody> 
+	</table>
+	<p>※削除ボタンはコントロールキーを押しながらクリックして下さい</p>
+	
+	<h2>新しい作業の追加</h2>  <!-- step6-->
+	<form class="add-form" v-on:submit.prevent="doAdd"> <!--在表格下方追加东西-->
+	  <!-- コメント入力フォーム -->
+	  作業 <input type="text" ref="comment">
+	  <!-- 追加ボタンのモック -->
+	  <button type="submit">追加</button>
+	</form>
+	
+    <!-- 新規登録フォーム -->
+  </div>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
